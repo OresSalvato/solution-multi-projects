@@ -72,19 +72,22 @@ public class RestStudentServiceController implements IAnyRecord<Student> {
 
   @PostConstruct
   public void init() {
-    Student anyStudent = new Student();
+    Student anyStudent;
     {
+      anyStudent = new Student();
       anyStudent.setAge(666);
       anyStudent.setName("Undertaker");
       anyStudent.setRegistrationNumber("999-666-999");
       this.add(anyStudent);
     }
     {
+      anyStudent = new Student();
       anyStudent.setAge(55);
       anyStudent.setName("Kane");
       anyStudent.setRegistrationNumber("876-123-444");
       this.add(anyStudent);
     }{
+      anyStudent = new Student();
       anyStudent.setAge(99);
       anyStudent.setName("The Priest");
       anyStudent.setRegistrationNumber("123-000-321");
