@@ -1,78 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<!-- parent pom - SET Spring boot -->
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!-- parent pom -->
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.1.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<groupId>com.ores.salvato</groupId>
+		<artifactId>solution-multi-projects</artifactId>
+		<version>1.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- Solution pom -->
+	<!-- rest pom -->
 	<groupId>com.ores.salvato</groupId>
-	<artifactId>solution-multi-projects</artifactId>
-	<packaging>pom</packaging>
-	<version>1.0</version>
+	<artifactId>rest.api</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
 
-	<properties>
-		<!-- https://maven.apache.org/general.html#encoding-warning -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<spring.version>5.1.0.RELEASE</spring.version>
-		<java.version>1.8</java.version>
+	<name>SpringDemo</name>
+	<description>Demo project for Spring Boot</description>
 
-		<!-- Our projects versioning -->
-		<company.commons>1.0-SNAPSHOT</company.commons>
-	</properties>
-	<modules>
-		<module>any.interfaces</module>
-		<module>entities</module>
-		<module>rest.api</module>
-	</modules>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<artifactId>lombok</artifactId>
-				<groupId>org.projectlombok</groupId>
-				<version>1.18.10</version>
-			</dependency>
-			<dependency>
-				<artifactId>spring-web</artifactId>
-				<groupId>org.springframework</groupId>
-				<version>5.2.1.RELEASE</version>
-			</dependency>
-			<dependency>
-				<artifactId>javax.persistence</artifactId>
-				<groupId>org.eclipse.persistence</groupId>
-				<version>2.2.1</version>
-			</dependency>
-			<dependency>
-				<artifactId>validation-api</artifactId>
-				<groupId>javax.validation</groupId>
-				<version>2.0.1.Final</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
-		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-maven-plugin</artifactId>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+	<dependencies>
+		<dependency>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<groupId>org.springframework.boot</groupId>
+		</dependency>
+		<dependency>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>org.springframework.boot</groupId>
+		</dependency>
+		<dependency>
+			<artifactId>spring-boot-devtools</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<artifactId>spring-context</artifactId>
+			<groupId>org.springframework</groupId>
+			<version>5.2.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot</artifactId>
+			<version>2.2.1.RELEASE</version>
+		</dependency>
+		<!-- DB JPA Data -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsondb</groupId>
+			<artifactId>jsondb-core</artifactId>
+			<version>1.0.106</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+		<!-- My modules -->
+		<dependency>
+			<groupId>com.ores.salvato.entities</groupId>
+			<artifactId>entities</artifactId>
+			<version>1.0</version>
+			<!--            <scope>compile</scope>-->
+		</dependency>
+		<dependency>
+			<groupId>com.ores.salvato.interfaces</groupId>
+			<artifactId>any.interfaces</artifactId>
+			<version>1.0</version>
+			<!--            <scope>compile</scope>-->
+		</dependency>
+	</dependencies>
+
 </project>
