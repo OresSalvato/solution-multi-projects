@@ -2,14 +2,12 @@ package com.ores.salvato.interfaces.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
 @Data
-@SuperBuilder
 @NoArgsConstructor
 public abstract class AnyRecord{
 
