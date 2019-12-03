@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!-- parent pom -->
+    <parent>
+        <groupId>com.ores.salvato</groupId>
+		<artifactId>solution-multi-projects</artifactId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+	
+	<!-- interfaces pom -->
+    <groupId>com.ores.salvato.interfaces</groupId>
+    <artifactId>any.interfaces</artifactId>
+    <version>1.0</version>
+    <dependencies>
+        <dependency>
+            <artifactId>lombok</artifactId>
+            <groupId>org.projectlombok</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>spring-web</artifactId>
+            <groupId>org.springframework</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>javax.persistence</artifactId>
+            <groupId>org.eclipse.persistence</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>validation-api</artifactId>
+            <groupId>javax.validation</groupId>
+        </dependency>
+    </dependencies>
+    <packaging>jar</packaging>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
