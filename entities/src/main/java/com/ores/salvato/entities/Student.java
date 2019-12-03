@@ -14,7 +14,6 @@ import java.util.UUID;
 @Entity
 @Table(name="students", schema = "students.db")
 @Data
-@SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 public class Student extends AnyRecord {
 
