@@ -1,6 +1,6 @@
 package spring.SpringDemo;
 
-import com.ores.salvato.interfaces.model.AnyRecordType;
+import com.ores.salvato.interfaces.model.AnyRecord;
 import com.ores.salvato.interfaces.proxy.IProxyRepository;
 
 import io.jsondb.JsonDBTemplate;
@@ -34,7 +34,7 @@ public class SpringDemoApplication extends SpringBootServletInitializer {
 
   public static void main(String[] args) {
 
-    AnyRecordType rec;
+    AnyRecord rec;
    // rec = new User();
    // repo = new JsonDbRepository();
    // repo.initialize("com.ores.salvato.entities");

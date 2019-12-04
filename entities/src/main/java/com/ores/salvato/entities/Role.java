@@ -1,5 +1,5 @@
 package com.ores.salvato.entities;
-import com.ores.salvato.interfaces.model.AnyRecordType;
+import com.ores.salvato.interfaces.model.AnyRecord;
 
 import lombok.*;
 
@@ -11,7 +11,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "role")
-public class Role extends AnyRecordType  implements Serializable {
+public class Role extends AnyRecord implements Serializable {
 
   /**
    * Role: get name

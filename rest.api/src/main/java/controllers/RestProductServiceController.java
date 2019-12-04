@@ -2,6 +2,9 @@ package controllers;
 
 import com.ores.salvato.entities.Product;
 import com.ores.salvato.interfaces.model.IAnyRecord;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
@@ -11,18 +14,12 @@ import java.util.*;
 
 @RestController
 @RequestMapping(value = "product")
-public class RestProductServiceController{// implements IAnyRecord<Product> {
+public class RestProductServiceController {// implements IAnyRecord<Product> {
 
-  @Autowired
+  //@Autowired
+  @Getter
+  @Setter(AccessLevel.PROTECTED)
   private ProductRepository repository;
-
-  public ProductRepository getRepository() {
-    return repository;
-  }
-
-  public void setRepository(ProductRepository repository) {
-    this.repository = repository;
-  }
 
   private final Map<String, Product> allItems = new HashMap<>();
   private Product anyProduct;
@@ -53,9 +50,7 @@ public class RestProductServiceController{// implements IAnyRecord<Product> {
       product.setName(item.getName());
       product.setDescription(item.getDescription());
       return repository.save(product);
-    }).orElseGet(() -> {
-      return repository.save(item);
-    });
+    }).orElseGet(() -> repository.save(item));
     //this.allItems.replace(id, item);
     //return item;
   }

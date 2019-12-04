@@ -1,6 +1,6 @@
 package com.ores.salvato.entities;
-import com.ores.salvato.interfaces.model.AnyRecord;
 
+import com.ores.salvato.interfaces.model.AnyRecord;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Table(name="students", schema = "students.db")
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Student extends AnyRecord  implements Serializable {
+public class Student extends AnyRecord implements Serializable {
 
     @Column(name="regnum" , unique = true)
     private String registrationNumber;

@@ -1,9 +1,8 @@
 package com.ores.salvato.entities;
-import com.ores.salvato.interfaces.model.AnyRecord;
 
+import com.ores.salvato.interfaces.model.AnyRecord;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

@@ -9,6 +9,8 @@ import com.ores.salvato.interfaces.proxy.IProxyRepository;
  *
  */
 public class ProxyRepositoryJSON {
+
+
   private IProxyRepository _proxy;
   private ProxyRepositoryJSON() { }
 

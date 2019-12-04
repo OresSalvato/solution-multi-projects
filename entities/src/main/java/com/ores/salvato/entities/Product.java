@@ -1,6 +1,6 @@
 package com.ores.salvato.entities;
-import com.ores.salvato.interfaces.model.AnyRecord;
 
+import com.ores.salvato.interfaces.model.AnyRecord;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Table(name="products", schema = "products.db")
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Product extends AnyRecord  implements Serializable {
+public class Product extends AnyRecord implements Serializable {
 
     @Column(name="descr")
     public String description;
