@@ -1,7 +1,9 @@
 package com.ores.salvato.interfaces.model;
 
-import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.AccessLevel;
 
 import javax.persistence.Column;
 import javax.persistence.Id;

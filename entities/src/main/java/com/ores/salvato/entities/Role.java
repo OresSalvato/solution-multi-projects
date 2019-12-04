@@ -2,18 +2,16 @@ package com.ores.salvato.entities;
 import com.ores.salvato.interfaces.model.AnyRecordType;
 
 import lombok.*;
-import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "role")
-public class Role extends AnyRecordType {
+public class Role extends AnyRecordType  implements Serializable {
 
   /**
    * Role: get name
