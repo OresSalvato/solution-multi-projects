@@ -3,6 +3,7 @@ import com.ores.salvato.interfaces.model.AnyRecord;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -16,17 +17,12 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "users")
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class User extends AnyRecord{
-
-  public void setId(){
-    super.setId(UUID.randomUUID().toString());
-  }
+public class User extends AnyRecord {
 
   @Column(name = "email")
   @Email(message = "*Please provide a valid Email")

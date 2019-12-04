@@ -1,23 +1,14 @@
 package com.ores.salvato.interfaces.model;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
+import java.util.UUID;
 
-@Data
-@NoArgsConstructor
-public abstract class AnyRecord{
-
-    public static final String INVALID_ID = "-1";
-    @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private String id = INVALID_ID;
-
-    @Column(name = "name")
-    @NotEmpty(message = "*Please provide name")
-    public String name;
+//@Data
+//@EqualsAndHashCode(callSuper = true)
+public class AnyRecord extends AnyRecordType {
+  public AnyRecord(){
+    super.setId(UUID.randomUUID().toString());
+  }
 }
