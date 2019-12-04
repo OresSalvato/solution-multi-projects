@@ -1,19 +1,31 @@
 package com.ores.salvato.entities;
 import com.ores.salvato.interfaces.model.AnyRecord;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "role")
-public class Role extends AnyRecord {
+public class Role extends AnyRecord implements Serializable {
 
-  @Column(name = "role")
-  private String role;
+  /**
+   * Role: get name
+   * */
+  @Override
+  public String getName(){
+    return super.getName();
+  }
+
+  /**
+   * Role: set new name
+   * */
+  @Override
+  public void setName(String roleName){
+    super.setName(roleName);
+  }
 }

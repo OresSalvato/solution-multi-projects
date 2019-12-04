@@ -1,8 +1,10 @@
 package controllers;
 
+import com.ores.salvato.entities.Role;
 import com.ores.salvato.entities.User;
 import com.ores.salvato.interfaces.model.IAnyRecord;
 
+import org.springframework.lang.NonNull;
 import repositories.JsonDbRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,15 @@ public final class RestUserServiceController implements IAnyRecord<User> {
   private final String collectionName ="User";
   private JsonDbRepository jsonDB ;//= ((JsonDbRepository)repo);
 
+  private boolean isInvalidID(@NonNull String id){
+    return id.equals(User.INVALID_ID);
+  }
+  private void throwIfInvalidId(String id){
+    if (isInvalidID(id)){
+      throw new RuntimeException("Invalid Id received - ");
+    }
+  }
+
   @Override
   @RequestMapping(method = RequestMethod.POST)
   @ResponseBody
@@ -30,9 +41,8 @@ public final class RestUserServiceController implements IAnyRecord<User> {
   @RequestMapping(value = "{id}", method = RequestMethod.PUT)
   @ResponseBody
   public User update(@PathVariable final String id, @RequestBody final User item) {
-    if ((item.getId() == User.INVALID_ID) || (id == User.INVALID_ID)) {
-      throw new RuntimeException("Invalid Id received - ");
-    }
+    throwIfInvalidId(id);
+    throwIfInvalidId(item.getId());
     jsonDB.dbTemplate.upsert(item, collectionName);
     return item;
   }
@@ -41,8 +51,9 @@ public final class RestUserServiceController implements IAnyRecord<User> {
   @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
   @ResponseStatus(value = HttpStatus.OK)
   public void delete(@PathVariable final String id) {
+    throwIfInvalidId(id);
     User userToDelete = new User();
-    userToDelete.setId(id);
+    //userToDelete.setId(id);
     jsonDB.dbTemplate.remove(userToDelete, collectionName);
   }
 
@@ -57,6 +68,7 @@ public final class RestUserServiceController implements IAnyRecord<User> {
   @RequestMapping(value = "{id}", method = RequestMethod.GET)
   @ResponseBody
   public User getById(@PathVariable final String id) {
+    throwIfInvalidId(id);
     return jsonDB.dbTemplate.findById(id,collectionName);
   }
 
@@ -72,6 +84,9 @@ public final class RestUserServiceController implements IAnyRecord<User> {
   @ResponseBody
   public List<User> findBySurName(@RequestParam final String surname) {
     String jxQuery = String.format("/.[lastName='%s']", surname);
+
+    Role r = new Role();
+    r.setName("");
     return jsonDB.dbTemplate.find(jxQuery, collectionName);
   }
 }

@@ -8,13 +8,11 @@ import io.jsondb.JsonDBTemplate;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import repositories.JsonDbRepository;
 
 
 @Configuration
@@ -57,7 +55,7 @@ public class SpringDemoApplication extends SpringBootServletInitializer {
     //SourceDb db = spring.SpringDemo.SourceDb.get();
 
 		//jsonDBTemplate = jsonRepository.getInstance();
-    /** User db initialisation */{
+    /* User db initialisation */{
     //  String baseScanPackage = "beans.student.model";
     //  jsonDBTemplate = new JsonDBTemplate(dbFilesLocation, baseScanPackage);
      // String collectionName = User.class.getAnnotation(Document.class).collection();
