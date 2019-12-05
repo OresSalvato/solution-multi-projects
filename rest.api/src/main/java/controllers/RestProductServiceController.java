@@ -1,29 +1,25 @@
 package controllers;
 
 import com.ores.salvato.entities.Product;
-import com.ores.salvato.interfaces.model.IAnyRecord;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import repositories.ProductRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
-import repositories.ProductRepository;
 
-import java.util.*;
+import java.util.List;
 
 @RestController
-@RequestMapping(value = "product")
-public class RestProductServiceController {// implements IAnyRecord<Product> {
+@RequestMapping(value = "/product")
+public class RestProductServiceController {
 
-  //@Autowired
-  @Getter
-  @Setter(AccessLevel.PROTECTED)
   private ProductRepository repository;
-
-  private final Map<String, Product> allItems = new HashMap<>();
   private Product anyProduct;
-  private int keyIndex = 0;
+
+  @Autowired
+  public RestProductServiceController(ProductRepository repository) {
+    this.repository = repository;
+  }
 
   private boolean isInvalidID(@NonNull String id) {
     return id.equals(Product.INVALID_ID);
@@ -37,9 +33,7 @@ public class RestProductServiceController {// implements IAnyRecord<Product> {
 
   @PostMapping()
   public Product add(@RequestBody final Product item) {
-    return repository.saveAndFlush(item);
-    //this.allItems.put(item.getId(), item);
-    //return item;
+    return repository.save(item);
   }
 
   @PutMapping("{id}")
@@ -51,29 +45,23 @@ public class RestProductServiceController {// implements IAnyRecord<Product> {
       product.setDescription(item.getDescription());
       return repository.save(product);
     }).orElseGet(() -> repository.save(item));
-    //this.allItems.replace(id, item);
-    //return item;
   }
 
   @DeleteMapping("{id}")
   public void delete(@PathVariable final String id) {
     throwIfInvalidId(id);
     repository.deleteById(id);
-    // this.allItems.remove(id);
   }
 
   @GetMapping()
   public List<Product> getAll() {
     return repository.findAll();
-    //Collection<Product> items = allItems.values();
-    //return new ArrayList<>(items);
   }
 
   @GetMapping("{id}")
   public Product getById(@PathVariable final String id) {
     throwIfInvalidId(id);
     return repository.findById(id).get();
-    //return this.allItems.get(id);
   }
 
 //  @GetMapping("search/{name}")

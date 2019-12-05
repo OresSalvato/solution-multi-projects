@@ -1,21 +1,19 @@
 package com.ores.salvato.interfaces.model;
 
 import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
-@EqualsAndHashCode
+@MappedSuperclass
 public abstract class AbstractId {
   public static final String INVALID_ID = "-1";
 
   @Id
   //@GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "id")
+  @Column(name = "id", unique = true)
   @Getter
   @Setter(AccessLevel.PROTECTED)
   private String id = INVALID_ID;

@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS product;
+
+CREATE TABLE user_data (
+  id VARCHAR2(50) PRIMARY KEY,
+  name VARCHAR(250) NOT NULL,
+  email VARCHAR(250) NOT NULL,
+  password VARCHAR(250) NOT NULL,
+  lastName VARCHAR(250),
+  active INT
+);
