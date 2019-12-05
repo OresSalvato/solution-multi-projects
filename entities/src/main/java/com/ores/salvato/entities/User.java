@@ -1,27 +1,23 @@
 package com.ores.salvato.entities;
 
 import com.ores.salvato.interfaces.model.AnyRecord;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.ManyToMany;
-import javax.persistence.CascadeType;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.Set;
 
+import java.io.Serializable;
+
+@Getter
+@Setter
 @Entity
-@Table(name = "users")
-@Data
-@EqualsAndHashCode(callSuper = true)
-public class User extends AnyRecord {
+@Table(name=User.TABLE_NAME)
+public class User extends AnyRecord implements Serializable {
+  public static final String TABLE_NAME= "user_data";
 
   @Column(name = "email")
   @Email(message = "*Please provide a valid Email")
@@ -39,9 +35,9 @@ public class User extends AnyRecord {
 
   @Column(name = "active")
   private int active;
-
-  @ManyToMany(cascade = CascadeType.ALL)
-  @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-  private Set<Role> roles;
+//
+//  @ManyToMany(cascade = CascadeType.ALL)
+//  @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+//  private Set<Role> roles;
 
 }

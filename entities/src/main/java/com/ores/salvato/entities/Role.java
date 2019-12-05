@@ -1,17 +1,21 @@
 package com.ores.salvato.entities;
+
 import com.ores.salvato.interfaces.model.AnyRecord;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
 import java.io.Serializable;
 
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 @Entity
-@Table(name = "role")
+@Table(name = Role.TABLE_NAME)
 public class Role extends AnyRecord implements Serializable {
+  public static final String TABLE_NAME= "role_data";
 
   /**
    * Role: get name

@@ -1,24 +1,24 @@
 package controllers;
 
-import com.ores.salvato.entities.Role;
 import com.ores.salvato.entities.User;
-import com.ores.salvato.interfaces.model.IAnyRecord;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
-import repositories.JsonDbRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
+import repositories.UserRepository;
 
 import java.util.List;
-//import static spring.SpringDemo.SpringDemoApplication.repo;
 
-@Controller
+@RestController
 @RequestMapping(value = "/user")
-public final class RestUserServiceController implements IAnyRecord<User> {
-  private final String collectionName ="User";
-  private JsonDbRepository jsonDB ;//= ((JsonDbRepository)repo);
+public final class RestUserServiceController {
+
+  private UserRepository repository;
+  private User anyUser;
+
+  @Autowired
+  public RestUserServiceController(UserRepository repository) {
+    this.repository = repository;
+  }
 
   private boolean isInvalidID(@NonNull String id){
     return id.equals(User.INVALID_ID);
@@ -29,64 +29,57 @@ public final class RestUserServiceController implements IAnyRecord<User> {
     }
   }
 
-  @Override
-  @RequestMapping(method = RequestMethod.POST)
-  @ResponseBody
+  @PostMapping()
   public User add(@RequestBody final User item) {
-    jsonDB.dbTemplate.insert(item,collectionName);
-    return item;
+    return repository.save(item);
   }
 
-  @Override
-  @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-  @ResponseBody
+  @PutMapping("{id}")
   public User update(@PathVariable final String id, @RequestBody final User item) {
     throwIfInvalidId(id);
     throwIfInvalidId(item.getId());
-    jsonDB.dbTemplate.upsert(item, collectionName);
-    return item;
+    return repository.findById(id).map(user -> {
+      user.setName(item.getName());
+      user.setLastName(item.getLastName());
+      user.setEmail(item.getEmail());
+      user.setPassword(item.getPassword());
+      user.setActive(item.getActive());
+      return repository.save(user);
+    }).orElseGet(() -> repository.save(item));
   }
 
-  @Override
-  @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-  @ResponseStatus(value = HttpStatus.OK)
+  @DeleteMapping("{id}")
   public void delete(@PathVariable final String id) {
     throwIfInvalidId(id);
-    User userToDelete = new User();
-    //userToDelete.setId(id);
-    jsonDB.dbTemplate.remove(userToDelete, collectionName);
+    repository.deleteById(id);
   }
 
-  @Override
-  @RequestMapping(method = RequestMethod.GET)
-  @ResponseBody
+  @GetMapping()
   public List<User> getAll() {
-    return jsonDB.dbTemplate.getCollection(User.class);
+    return repository.findAll();
   }
 
-  @Override
-  @RequestMapping(value = "{id}", method = RequestMethod.GET)
-  @ResponseBody
+  @GetMapping("{id}")
   public User getById(@PathVariable final String id) {
     throwIfInvalidId(id);
-    return jsonDB.dbTemplate.findById(id,collectionName);
+    return repository.findById(id).get();
   }
 
-  @Override
-  @RequestMapping(value = "search/{name}", method = RequestMethod.GET)
-  @ResponseBody
-  public User findByName(@PathVariable final String name) {
-    String jxQuery = String.format("/.[name='%s']", name);
-    return jsonDB.dbTemplate.findOne(jxQuery, collectionName);
-  }
-
-  @RequestMapping(value = "find{surname}", method = RequestMethod.GET)
-  @ResponseBody
-  public List<User> findBySurName(@RequestParam final String surname) {
-    String jxQuery = String.format("/.[lastName='%s']", surname);
-
-    Role r = new Role();
-    r.setName("");
-    return jsonDB.dbTemplate.find(jxQuery, collectionName);
-  }
+//  @Override
+//  @RequestMapping(value = "search/{name}", method = RequestMethod.GET)
+//  @ResponseBody
+//  public User findByName(@PathVariable final String name) {
+//    String jxQuery = String.format("/.[name='%s']", name);
+//    return jsonDB.dbTemplate.findOne(jxQuery, collectionName);
+//  }
+//
+//  @RequestMapping(value = "find{surname}", method = RequestMethod.GET)
+//  @ResponseBody
+//  public List<User> findBySurName(@RequestParam final String surname) {
+//    String jxQuery = String.format("/.[lastName='%s']", surname);
+//
+//    Role r = new Role();
+//    r.setName("");
+//    return jsonDB.dbTemplate.find(jxQuery, collectionName);
+//  }
 }

@@ -1,31 +1,39 @@
 package spring.SpringDemo;
 
 import com.ores.salvato.interfaces.model.AnyRecord;
-import com.ores.salvato.interfaces.proxy.IProxyRepository;
 
-import io.jsondb.JsonDBTemplate;
-
+import controllers.RestProductServiceController;
+import controllers.RestStudentServiceController;
+import controllers.RestUserServiceController;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import repositories.ProductRepository;
+import repositories.StudentRepository;
+import repositories.UserRepository;
 
 
 @Configuration
 @SpringBootApplication
-@EnableAutoConfiguration
 @EnableConfigurationProperties
-@ComponentScan(basePackages = {"controllers"})
+@ComponentScan(basePackageClasses = {
+    RestProductServiceController.class,
+    RestStudentServiceController.class,
+    RestUserServiceController.class
+})
+@EntityScan(basePackages = {"com.ores.salvato.entities"})
+@EnableJpaRepositories(basePackageClasses = {
+    ProductRepository.class,
+    StudentRepository.class,
+    UserRepository.class
+})
 public class SpringDemoApplication extends SpringBootServletInitializer {
-  public static IProxyRepository repo;
-
-  //private static JsonDBConfig config;
-  public static JsonDBTemplate jsonDBTemplate;
-  private static String dbFilesLocation = "C:\\Projects\\Private\\solution_DEMO\\rest.api\\src\\main\\dbfiles";
 
   protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
     return builder
@@ -35,10 +43,10 @@ public class SpringDemoApplication extends SpringBootServletInitializer {
   public static void main(String[] args) {
 
     AnyRecord rec;
-   // rec = new User();
-   // repo = new JsonDbRepository();
-   // repo.initialize("com.ores.salvato.entities");
-   // repo.setCollection(User.class);
+    // rec = new User();
+    // repo = new JsonDbRepository();
+    // repo.initialize("com.ores.salvato.entities");
+    // repo.setCollection(User.class);
     //
 //    rec = new Student();
 //    repo2 = new JsonDbRepository();
@@ -50,18 +58,10 @@ public class SpringDemoApplication extends SpringBootServletInitializer {
 //    repo3.initialize("beans.product.model");
 //    repo3.setCollection(Product.class);
 
-   // repo.initialize("User");
-   // repo.repo
+    // repo.initialize("User");
+    // repo.repo
     //SourceDb db = spring.SpringDemo.SourceDb.get();
 
-		//jsonDBTemplate = jsonRepository.getInstance();
-    /* User db initialisation */{
-    //  String baseScanPackage = "beans.student.model";
-    //  jsonDBTemplate = new JsonDBTemplate(dbFilesLocation, baseScanPackage);
-     // String collectionName = User.class.getAnnotation(Document.class).collection();
-     // if (!jsonDBTemplate.collectionExists(collectionName))
-     //   jsonDBTemplate.createCollection(collectionName);
-    }
     SpringApplication.run(SpringDemoApplication.class);
   }
 }
